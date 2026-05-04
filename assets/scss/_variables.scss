@@ -1,0 +1,32 @@
+:root {
+  --font-primary: 'DM Sans', sans-serif;
+  --font-secondary: 'Arial', sans-serif;
+
+  // Main colors
+  --color-accent: #A18A68;
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+
+  // Neutral colors
+  --color-neutral-dark-gray: #707070;
+  --color-neutral-gray: #D8D8D8;
+  --color-neutral-light-gray: #EFEFEF;
+
+  // Service colors
+  --color-error: rgba(216, 39, 0, 1);
+}
+
+.dark {
+  // Main colors
+  --color-accent: #A18A68;
+  --color-white: #FFFFFF;
+  --color-black: #1A1A1A;
+
+  // Neutral colors
+  --color-neutral-dark-gray: rgba(213, 213, 213, 1);
+  --color-neutral-gray: rgba(61, 61, 61, 1);
+  --color-neutral-light-gray: rgba(39, 39, 39, 1);
+
+  // Service colors
+  --color-error: rgba(216, 39, 0, 1);
+}
