@@ -1,5 +1,6 @@
 <script>
   //
+  console.log('test')
 </script>
 
 <template>
