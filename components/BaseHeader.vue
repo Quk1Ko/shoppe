@@ -19,5 +19,5 @@ import ProfileIcon from "@/assets/icons/IconProfile.vue"
 </template>
 
 <style lang="scss" scoped>
-
+//
 </style>
