@@ -1,3 +1,7 @@
+@use 'variables' as *;
+@use 'typography';
+@use 'layouts';
+
 @font-face {
   font-family: 'DM Sans';
   src: url('../fonts/DMSans-Regular.ttf') format('truetype');
@@ -21,10 +25,6 @@
   font-style: normal;
   font-display: swap;
 }
-@use 'variables' as *;
-@use 'typography';
-@use 'layouts';
-
 h1{
   font-family: var(--font-primary), sans-serif;
   font-weight: var(--h1-weight);
