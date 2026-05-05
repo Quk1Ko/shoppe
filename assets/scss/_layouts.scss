@@ -2,9 +2,9 @@
 
 .container {
   width: 96%;
-  margin: 0 auto;
   max-width: 346px;
   padding: 0 16px;
+  margin: 0 auto;
 
   @media (min-width: $breakpoints-m) {
     max-width: 696px;

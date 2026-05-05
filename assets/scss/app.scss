@@ -4,30 +4,30 @@
 
 @font-face {
   font-family: 'DM Sans';
-  src: url('../fonts/DMSans-Regular.ttf') format('truetype');
+  font-style: normal;
   font-weight: 400;
-  font-style: normal;
+  src: url('../fonts/DMSans-Regular.ttf') format('truetype');
   font-display: swap;
 }
 
 @font-face {
   font-family: 'DM Sans';
-  src: url('../fonts/DMSans-Medium.ttf') format('truetype');
+  font-style: normal;
   font-weight: 500;
-  font-style: normal;
+  src: url('../fonts/DMSans-Medium.ttf') format('truetype');
   font-display: swap;
 }
 
 @font-face {
   font-family: 'DM Sans';
-  src: url('../fonts/DMSans-Bold.ttf') format('truetype');
-  font-weight: 700;
   font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/DMSans-Bold.ttf') format('truetype');
   font-display: swap;
 }
-h1{
+h1 {
   font-family: var(--font-primary), sans-serif;
-  font-weight: var(--h1-weight);
   font-size: var(--h1-size);
+  font-weight: var(--h1-weight);
   line-height: var(--h1-lh);
 }

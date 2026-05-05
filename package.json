@@ -16,7 +16,8 @@
     "lint:styles": "stylelint \"**/*.{vue,scss}\"",
     "format": "prettier --write .",
     "lint:fix": "npm run format && npm run lint:styles -- --fix && npm run lint -- --fix",
-    "prepare": "husky"
+    "prepare": "husky",
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "@nuxt/fonts": "^0.14.0",

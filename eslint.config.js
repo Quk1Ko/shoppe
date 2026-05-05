@@ -9,7 +9,7 @@ import globals from 'globals'
 export default [
   js.configs.recommended,
   {
-    ignores: ['.nuxt/**', '.output/**', 'dist/**', 'node_modules/**'],
+    ignores: ['.nuxt/**', '.output/**', 'dist/**', 'node_modules/**', "**/*.d.ts", ".env.d.ts"],
   },
   {
     files: ['**/*.{js,ts,vue}'],
