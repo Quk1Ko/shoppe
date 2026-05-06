@@ -51,10 +51,8 @@ jobs:
         run: |
           npx stylelint ${{ steps.changed_css.outputs.all_changed_files }}
 
-      - name: Type check
-        run: |
-          npx nuxi prepare
-          npx vue-tsc --noEmit
+      - name: Run TypeScript type check
+        run: npx nuxt typecheck
 
   build:
     name: Build project
