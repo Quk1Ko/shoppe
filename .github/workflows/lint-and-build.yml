@@ -51,12 +51,11 @@ jobs:
         run: |
           npx stylelint ${{ steps.changed_css.outputs.all_changed_files }}
 
-      - name: Prepare Nuxt (generate .nuxt/tsconfig)
+      - name: Prepare Nuxt
         run: npx nuxi prepare
 
       - name: Run TypeScript type check
-        run: npx nuxt typecheck
-
+        run: npx nuxi typecheck
 
   build:
     name: Build project
