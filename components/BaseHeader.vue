@@ -16,7 +16,3 @@
     <button><ProfileIcon /></button>
   </div>
 </template>
-
-<style lang="scss" scoped>
-  // text
-</style>
