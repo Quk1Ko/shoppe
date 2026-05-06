@@ -83,3 +83,14 @@ jobs:
 
       - name: Generate static site
         run: npm run generate
+
+      - name: Generate Nuxt types
+        run: npx nuxi prepare
+
+      - name: Typecheck
+        run: |
+          if [ -f "tsconfig.json" ]; then
+            npx tsc --noEmit
+          else
+            echo "TypeScript config not found, skipping type check"
+          fi
