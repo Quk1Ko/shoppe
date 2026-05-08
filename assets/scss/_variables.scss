@@ -1,0 +1,37 @@
+$breakpoints-m: 768px;
+$breakpoints-l: 1024px;
+$breakpoints-xl: 1280px;
+$breakpoints-xxl: 1920px;
+
+:root {
+  --font-primary: 'DM Sans', sans-serif;
+  --font-secondary: 'Arial', sans-serif;
+
+  // Main colors
+  --color-accent: #a18a68;
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  // Neutral colors
+  --color-neutral-dark-gray: #707070;
+  --color-neutral-gray: #d8d8d8;
+  --color-neutral-light-gray: #efefef;
+
+  // Service colors
+  --color-error: rgba(216, 39, 0, 1);
+}
+
+.dark {
+  // Main colors
+  --color-accent: #a18a68;
+  --color-white: #ffffff;
+  --color-black: #1a1a1a;
+
+  // Neutral colors
+  --color-neutral-dark-gray: rgba(213, 213, 213, 1);
+  --color-neutral-gray: rgba(61, 61, 61, 1);
+  --color-neutral-light-gray: rgba(39, 39, 39, 1);
+
+  // Service colors
+  --color-error: rgba(216, 39, 0, 1);
+}

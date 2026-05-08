@@ -51,13 +51,11 @@ jobs:
         run: |
           npx stylelint ${{ steps.changed_css.outputs.all_changed_files }}
 
+      - name: Prepare Nuxt
+        run: npx nuxi prepare
+
       - name: Run TypeScript type check
-        run: |
-          if [ -f "tsconfig.json" ]; then
-            npx tsc --noEmit
-          else
-            echo "TypeScript config not found, skipping type check"
-          fi
+        run: npx vue-tsc --noEmit -p .nuxt/tsconfig.json
 
   build:
     name: Build project
