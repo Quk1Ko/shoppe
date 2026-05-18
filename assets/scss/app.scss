@@ -31,3 +31,41 @@ h1 {
   font-weight: var(--h1-weight);
   line-height: var(--h1-lh);
 }
+h2 {
+  font-family: var(--font-primary), sans-serif;
+  font-size: var(--h2-size);
+  font-weight: var(--h2-weight);
+  line-height: var(--h2-lh);
+}
+h3 {
+  font-family: var(--font-primary), sans-serif;
+  font-size: var(--h3-size);
+  font-weight: var(--h3-weight);
+  line-height: var(--h3-lh);
+}
+h4 {
+  font-family: var(--font-primary), sans-serif;
+  font-size: var(--h4-size);
+  font-weight: var(--h4-weight);
+  line-height: var(--h4-lh);
+}
+h5 {
+  margin-bottom: var(--h5-paragraph-spacing);
+  font-family: var(--font-primary), sans-serif;
+  font-size: var(--h5-size);
+  font-weight: var(--h5-weight);
+  line-height: var(--h5-lh);
+}
+.header__nav p {
+  margin: 0;
+  font-family: var(--font-primary), sans-serif;
+  font-size: var(--h5-size);
+  font-weight: var(--h5-weight);
+  line-height: var(--h5-lh);
+  color: var(--color-text);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
