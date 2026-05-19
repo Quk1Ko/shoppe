@@ -6,6 +6,7 @@
   import ProfileIcon from '@/assets/icons/IconProfile.vue'
   import CloseIcon from '@/assets/icons/IconCross.vue'
   import IconGroupIcon from '@/assets/icons/IconGroup.vue'
+  import OutIcon from '@/assets/icons/IconOut.vue'
 
   const isMobileMenuOpen = ref(false)
 
@@ -32,7 +33,7 @@
 
   const mobileMenuBottomItems = [
     { label: 'My account', to: '/account', icon: ProfileIcon },
-    { label: 'Logout', to: '/logout' },
+    { label: 'Logout', to: '/logout', icon: OutIcon },
   ]
 
   const toggleMobileMenu = () => {
@@ -46,7 +47,7 @@
 
 <template>
   <header class="header">
-    <div class="header__container">
+    <div class="container header__container">
       <a class="header__logo" href="/">
         <LogoIcon />
       </a>
@@ -132,7 +133,7 @@
               @click="closeMobileMenu"
             >
               <component :is="item.icon" v-if="item.icon" />
-              <span>{{ item.label }}</span>
+              <span class="mobile-menu__link">{{ item.label }}</span>
             </NuxtLink>
           </div>
         </div>
@@ -142,19 +143,22 @@
 </template>
 
 <style lang="scss" scoped>
+  // @use '@/assets/scss/variables' as *;
   .header {
     width: 100%;
+    font-family: var(--font-primary), sans-serif;
     background: var(--color-white);
     border-bottom: 1px solid #e9e3db;
 
     &__container {
       display: flex;
-      gap: 40px;
+      gap: 20px;
       align-items: center;
       justify-content: space-between;
-      max-width: 1280px;
-      height: 84px;
-      padding: 0 96px;
+      width: 96%;
+      max-width: 346px;
+      height: 64px;
+      padding: 0 16px;
       margin: 0 auto;
     }
 
@@ -164,53 +168,14 @@
       align-items: center;
     }
 
-    &__nav {
-      display: flex;
-      flex: 1 1 auto;
-      gap: 28px;
-      align-items: center;
-      justify-content: flex-end;
-    }
-
-    &__nav-link {
-      font-family: var(--font-primary), sans-serif;
-      font-size: var(--h5-size);
-      font-weight: var(--h5-weight);
-      line-height: var(--h5-lh);
-      color: var(--color-text);
-      text-decoration: none;
-      background: none;
-
-      &:visited {
-        color: var(--color-text);
-        text-decoration: none;
-      }
-
-      &:hover {
-        color: var(--color-primary);
-        text-decoration: none;
-      }
-
-      &:active {
-        color: var(--color-primary);
-      }
-    }
-
-    &__divider {
-      flex: 0 0 auto;
-      width: 2px;
-      height: 22px;
-      background: #bdb7b0;
-    }
-
+    &__nav,
+    &__divider,
     &__icons {
-      display: flex;
-      gap: 22px;
-      align-items: center;
+      display: none;
     }
 
     &__mobile-actions {
-      display: none;
+      display: flex;
       gap: 12px;
       align-items: center;
     }
@@ -234,12 +199,84 @@
         transform: scale(0.95);
       }
     }
+
+    @media (min-width: $breakpoints-m) {
+      &__container {
+        gap: 40px;
+        max-width: 696px;
+        height: 84px;
+        padding: 0 36px;
+      }
+
+      &__nav {
+        display: flex;
+        flex: 1 1 auto;
+        gap: 28px;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      &__nav-link {
+        font-size: var(--h5-size);
+        font-weight: var(--h5-weight);
+        line-height: var(--h5-lh);
+        color: var(--color-text);
+        text-decoration: none;
+
+        &:hover {
+          color: var(--color-primary);
+        }
+      }
+
+      &__divider {
+        display: block;
+        flex: 0 0 auto;
+        width: 2px;
+        height: 22px;
+        background: #bdb7b0;
+      }
+
+      &__icons {
+        display: flex;
+        gap: 22px;
+        align-items: center;
+      }
+
+      &__mobile-actions {
+        display: none;
+      }
+    }
+
+    @media (min-width: $breakpoints-l) {
+      &__container {
+        max-width: 936px;
+        padding: 0 36px;
+      }
+    }
+
+    @media (min-width: $breakpoints-xl) {
+      &__container {
+        max-width: 1216px;
+        padding: 0 112px;
+      }
+    }
+
+    @media (min-width: $breakpoints-xxl) {
+      &__container {
+        max-width: 1680px;
+        padding: 0 120px;
+      }
+    }
   }
 
   .mobile-menu {
     position: fixed;
     inset: 0;
     z-index: 50;
+    font-size: var(--h1-size);
+    font-weight: var(--h1-weight);
+    line-height: var(--h1-lh);
+    color: var(--color-text);
 
     &__backdrop {
       position: absolute;
@@ -339,25 +376,5 @@
   .fade-enter-from,
   .fade-leave-to {
     opacity: 0;
-  }
-
-  @media (width <= 768px) {
-    .header {
-      &__container {
-        gap: 20px;
-        height: 64px;
-        padding: 0 24px;
-      }
-
-      &__nav,
-      &__divider,
-      &__icons {
-        display: none;
-      }
-
-      &__mobile-actions {
-        display: flex;
-      }
-    }
   }
 </style>

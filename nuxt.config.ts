@@ -6,12 +6,18 @@ export default defineNuxtConfig({
   // future: {
   //   compatibilityVersion: 3
   // },
-
   typescript: {
-    typeCheck: false, // Временно отключаем строгую проверку при сборке
-    shim: false,
+    typeCheck: true,
   },
-
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "@/assets/scss/_variables.scss" as *;',
+        },
+      },
+    },
+  },
   devtools: { enabled: true },
   modules: ['@nuxt/fonts'],
   css: ['~/assets/scss/app.scss'],
