@@ -9,6 +9,11 @@ export default defineNuxtConfig({
   typescript: {
     typeCheck: true,
   },
+  vue: {
+    compilerOptions: {
+      isCustomElement: (tag) => tag.startsWith('swiper-'),
+    },
+  },
   vite: {
     css: {
       preprocessorOptions: {
