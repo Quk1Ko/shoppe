@@ -4,7 +4,8 @@
   import IconGroupIcon from '@/assets/icons/IconGroup.vue'
   import CartIcon from '@/assets/icons/IconCart.vue'
   import MobileMenu from './MobileMenu.vue'
-  import { navItems, iconItems } from './header.constants'
+  import { navItems, iconItems } from '~/constants/header.constants'
+  import BaseButton from '~/components/BaseButton.vue'
 
   const isMobileMenuOpen = ref(false)
 
@@ -32,29 +33,25 @@
       <div class="header__divider"></div>
 
       <div class="header__icons">
-        <button
+        <BaseButton
           v-for="item in iconItems"
           :key="item.aria"
           :aria-label="item.aria"
           class="header__icon"
-          type="button"
+          type="transparent"
         >
           <component :is="item.icon" />
-        </button>
+        </BaseButton>
       </div>
 
       <div class="header__mobile-actions">
-        <button class="header__mobile-action" type="button" aria-label="Корзина">
+        <BaseButton type="transparent" aria-label="Корзина">
           <CartIcon />
-        </button>
-        <button
-          class="header__mobile-action"
-          type="button"
-          aria-label="Открыть меню"
-          @click="toggleMobileMenu"
-        >
+        </BaseButton>
+
+        <BaseButton type="transparent" aria-label="Открыть меню" @click="toggleMobileMenu">
           <IconGroupIcon />
-        </button>
+        </BaseButton>
       </div>
     </div>
     <MobileMenu :is-open="isMobileMenuOpen" @close="closeMobileMenu" />
@@ -96,26 +93,6 @@
       display: flex;
       gap: 12px;
       align-items: center;
-    }
-
-    &__icon,
-    &__mobile-action {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px;
-      cursor: pointer;
-      background: none;
-      border: none;
-
-      &:hover {
-        background: rgb(0 0 0 / 5%);
-        border-radius: 8px;
-      }
-
-      &:active {
-        transform: scale(0.95);
-      }
     }
 
     @media (min-width: $breakpoints-m) {

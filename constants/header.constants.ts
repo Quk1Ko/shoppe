@@ -1,7 +1,7 @@
-import LensIcon from '@/assets/icons/IconLens.vue'
-import ProfileIcon from '@/assets/icons/IconProfile.vue'
-import OutIcon from '@/assets/icons/IconOut.vue'
-import CartIcon from '@/assets/icons/IconCart.vue'
+import LensIcon from '~/assets/icons/IconLens.vue'
+import ProfileIcon from '~/assets/icons/IconProfile.vue'
+import OutIcon from '~/assets/icons/IconOut.vue'
+import CartIcon from '~/assets/icons/IconCart.vue'
 
 export const navItems = [
   { label: 'Shop', to: '/shop' },

@@ -2,7 +2,7 @@
   import LogoIcon from '@/assets/icons/Shoppe.vue'
   import LensIcon from '@/assets/icons/IconLens.vue'
   import CloseIcon from '~/assets/icons/IconCross.vue'
-  import { mobileMenuItems, mobileMenuBottomItems } from './header.constants'
+  import { mobileMenuItems, mobileMenuBottomItems } from '~/constants/header.constants'
 
   defineProps<{
     isOpen: boolean
@@ -22,14 +22,9 @@
           <a class="mobile-menu__logo" href="/" @click="emit('close')">
             <LogoIcon />
           </a>
-          <button
-            class="mobile-menu__icon"
-            type="button"
-            aria-label="Закрыть"
-            @click="emit('close')"
-          >
+          <BaseButton type="transparent" aria-label="Закрыть" @click="emit('close')">
             <CloseIcon />
-          </button>
+          </BaseButton>
         </div>
 
         <label class="mobile-menu__search">
@@ -104,16 +99,6 @@
     &__logo {
       display: flex;
       align-items: center;
-    }
-
-    &__icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px;
-      cursor: pointer;
-      background: none;
-      border: none;
     }
 
     &__search {
