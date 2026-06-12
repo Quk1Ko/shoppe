@@ -4,25 +4,30 @@
 <template>
   <div class="home">
     <div class="home__slider">
+      <SearchBar class="home__search" />
       <HomeSlider />
     </div>
-
-    <h1>Home page</h1>
   </div>
 </template>
 <style lang="scss" scoped>
   .home {
-    align-items: center;
-    justify-content: center;
     max-width: 346px;
-    margin-top: 16px;
-    margin-right: auto;
-    margin-left: auto;
+    padding-inline: 16px;
+    margin: 16px auto 0;
+
+    &__search {
+      display: flex;
+    }
 
     @media (min-width: $breakpoints-m) {
       gap: 40px;
       max-width: 696px;
       height: 84px;
+      padding-inline: 24px;
+
+      &__search {
+        display: none;
+      }
     }
 
     @media (min-width: $breakpoints-l) {

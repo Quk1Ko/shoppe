@@ -36,7 +36,7 @@
       class="slider__swiper"
     >
       <SwiperSlide v-for="slide in slides" :key="slide.id">
-        <CardSlider :title="slide.title" :img="slide.img" :price="slide.price" />
+        <CardSlider :slide="slide" />
       </SwiperSlide>
     </Swiper>
   </div>
@@ -81,6 +81,18 @@
       transition:
         background-color 0.3s,
         opacity 0.3s;
+    }
+
+    @media (width <= 767px) {
+      :deep(.swiper-pagination-bullet) {
+        width: 4px;
+        height: 4px;
+      }
+
+      :deep(.swiper-pagination-bullet-active) {
+        width: 8px;
+        height: 8px;
+      }
     }
 
     @media (min-width: $breakpoints-m) {
