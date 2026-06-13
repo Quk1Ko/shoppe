@@ -21,6 +21,7 @@
     align-items: center;
     justify-content: center;
     padding: 8px;
+    font-family: var(--font-primary), sans-serif;
     cursor: pointer;
     background: none;
     border: none;

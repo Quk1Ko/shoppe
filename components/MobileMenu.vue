@@ -1,6 +1,5 @@
 <script setup lang="ts">
   import LogoIcon from '@/assets/icons/Shoppe.vue'
-  import LensIcon from '@/assets/icons/IconLens.vue'
   import CloseIcon from '~/assets/icons/IconCross.vue'
   import { mobileMenuItems, mobileMenuBottomItems } from '~/constants/header.constants'
 
@@ -27,10 +26,7 @@
           </BaseButton>
         </div>
 
-        <label class="mobile-menu__search">
-          <LensIcon class="mobile-menu__search-icon" />
-          <input type="text" placeholder="Search" />
-        </label>
+        <SearchBar />
 
         <nav class="mobile-menu__nav">
           <NuxtLink
@@ -99,24 +95,6 @@
     &__logo {
       display: flex;
       align-items: center;
-    }
-
-    &__search {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      padding: 12px 14px;
-      margin-bottom: 24px;
-      background: #f3f3f3;
-      border-radius: 8px;
-
-      input {
-        width: 100%;
-        font-size: 16px;
-        outline: none;
-        background: transparent;
-        border: none;
-      }
     }
 
     &__nav {
