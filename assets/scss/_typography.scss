@@ -34,17 +34,17 @@
   --body-small-paragraph-spacing: 10px;
 
   @media (max-width: 768px) {
-    --h1-size: 1, 25rem;
-    --h1-lh: 1, 625rem;
+    --h1-size: 20px;
+    --h1-lh: 26px;
 
-    --h2-size: 1rem;
-    --h2-lh: 1, 6875rem;
-    --h2-paragraph-spacing: 0, 625rem;
+    --h2-size: 20px;
+    --h2-lh: 27px;
+    --h2-paragraph-spacing: 10px;
 
-    --h3-size: 0, 875rem;
+    --h3-size: 17px;
 
-    --body-small-size: 0, 75rem;
-    --body-small-lh: 1, 25rem;
-    --body-small-paragraph-spacing: 0, 625rem;
+    --body-small-size: 12px;
+    --body-small-lh: 20px;
+    --body-small-paragraph-spacing: 10px;
   }
 }

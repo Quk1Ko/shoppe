@@ -84,7 +84,6 @@
 
       &__title {
         margin-bottom: 2px;
-        font-size: 1.25rem;
       }
 
       &__top {
@@ -98,7 +97,7 @@
 
       &__text,
       &__trend-text {
-        height: 7rem;
+        height: 78px;
         overflow: hidden;
         text-overflow: clip;
       }
