@@ -2,6 +2,7 @@
   import LogoIcon from '@/assets/icons/Shoppe.vue'
   import CloseIcon from '~/assets/icons/IconCross.vue'
   import { mobileMenuItems, mobileMenuBottomItems } from '~/constants/header.constants'
+  import SearchBar from '@/components/SearchBar.vue'
 
   defineProps<{
     isOpen: boolean

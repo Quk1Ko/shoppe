@@ -1,11 +1,14 @@
 <script setup lang="ts">
+  import SearchBar from '~/components/SearchBar.vue'
   import HomeSlider from '~/components/HomeSlider.vue'
+  import AboutSection from '~/components/AboutSection.vue'
 </script>
 <template>
   <div class="home">
     <div class="home__slider">
       <SearchBar class="home__search" />
       <HomeSlider />
+      <AboutSection />
     </div>
   </div>
 </template>

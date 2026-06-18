@@ -3,3 +3,7 @@
 
   await navigateTo('/home', { replace: true })
 </script>
+
+<template>
+  <div></div>
+</template>

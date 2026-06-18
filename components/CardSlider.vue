@@ -21,7 +21,7 @@
     <div class="slider__overlay">
       <div class="slider__content">
         <h1 class="slider__title">{{ slide.title }}</h1>
-        <h2 class="slider__title">{{ slide.price }}</h2>
+        <h2 class="slider__title slider__mobile-subtitle">{{ slide.price }}</h2>
         <BaseButton type="transparent" class="slider__btn">
           <h3 class="slider__btn-title">View Product</h3>
         </BaseButton>
@@ -89,11 +89,16 @@
         &__title {
           margin: 0;
         }
+
+        &__mobile-subtitle {
+          font-size: 16px;
+          font-weight: 400;
+        }
       }
 
       &__btn {
-        width: 92px;
-        height: 32px;
+        width: 122px;
+        height: 38px;
         padding: 0;
         margin-top: 10px;
         border: 1px solid var(--color-white);
@@ -101,7 +106,7 @@
         border-radius: 4px;
 
         &-title {
-          font-size: 12px;
+          font-size: 16px;
           font-weight: 400;
           line-height: 32px;
         }
