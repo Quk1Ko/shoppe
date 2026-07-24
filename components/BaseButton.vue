@@ -22,6 +22,7 @@
     justify-content: center;
     padding: 8px;
     font-family: var(--font-primary), sans-serif;
+    line-height: 0;
     cursor: pointer;
     background: none;
     border: none;

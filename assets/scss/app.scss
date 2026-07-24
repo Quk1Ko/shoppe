@@ -28,30 +28,16 @@
   src: url('../fonts/DMSans-Bold.ttf') format('truetype');
   font-display: swap;
 }
-
-//@font-face {
-//  font-family: 'DM Sans';
-//  font-style: normal;
-//  font-weight: 400;
-//  src: url('../fonts/DMSans-Regular.ttf') format('truetype');
-//  font-display: swap;
-//}
-//
-//@font-face {
-//  font-family: 'DM Sans';
-//  font-style: normal;
-//  font-weight: 500;
-//  src: url('../fonts/DMSans-Medium.ttf') format('truetype');
-//  font-display: swap;
-//}
-//
-//@font-face {
-//  font-family: 'DM Sans';
-//  font-style: normal;
-//  font-weight: 700;
-//  src: url('../fonts/DMSans-Bold.ttf') format('truetype');
-//  font-display: swap;
-//}
+html,
+body,
+#__nuxt,
+#app,
+#__layout {
+  height: 100%;
+  min-height: 100dvh;
+  padding: 0;
+  margin: 0;
+}
 html {
   font-family: var(--font-primary), 'DM Sans', sans-serif;
 }

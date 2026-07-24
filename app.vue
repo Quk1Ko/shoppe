@@ -2,10 +2,8 @@
   //const layout = 'custom'
 </script>
 <template>
-  <div>
-    <NuxtLayout>
-      <NuxtRouteAnnouncer />
-      <NuxtPage />
-    </NuxtLayout>
-  </div>
+  <NuxtLayout>
+    <NuxtRouteAnnouncer />
+    <NuxtPage />
+  </NuxtLayout>
 </template>
