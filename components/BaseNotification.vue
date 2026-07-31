@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import { computed, onMounted, onUnmounted, ref } from 'vue'
   import IconNotificationCheck from '~/assets/icons/IconNotificationCheck.vue'
   import IconCross from '~/assets/icons/IconCross.vue'
+  import { useBreakpoints } from '~/composables/useBreakpoints'
 
   withDefaults(
     defineProps<{
@@ -19,28 +19,16 @@
     close: []
   }>()
 
-  const windowWidth = ref(0)
-
-  const updateWidth = () => {
-    windowWidth.value = window.innerWidth
-  }
-
-  onMounted(() => {
-    updateWidth()
-    window.addEventListener('resize', updateWidth)
-  })
-
-  onUnmounted(() => {
-    window.removeEventListener('resize', updateWidth)
-  })
-
-  const layout = computed(() => (windowWidth.value < 768 ? 'mobile' : 'desktop'))
+  const { isDesktop } = useBreakpoints()
 </script>
 
 <template>
   <div
     class="base-notification"
-    :class="[`base-notification--${type}`, `base-notification--${layout}`]"
+    :class="[
+      `base-notification--${type}`,
+      isDesktop ? 'base-notification--desktop' : 'base-notification--mobile',
+    ]"
   >
     <div class="base-notification__content">
       <div class="base-notification__icon">
@@ -112,11 +100,11 @@
     }
 
     &--desktop {
-      bottom: 24px;
+      top: 24px;
     }
 
     &--mobile {
-      bottom: 16px;
+      top: 16px;
       max-width: 300px;
       padding: 14px 16px;
 
@@ -129,7 +117,7 @@
   @keyframes slide-up {
     from {
       opacity: 0;
-      transform: translateX(-50%) translateY(20px);
+      transform: translateX(-50%) translateY(-20px);
     }
 
     to {
