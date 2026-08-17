@@ -14,19 +14,24 @@
 </template>
 <style lang="scss" scoped>
   .home {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    width: 100%;
     max-width: 346px;
     padding-inline: 16px;
     margin: 16px auto 0;
 
-    &__search {
+    &__slider {
       display: flex;
+      flex: 1;
+      flex-direction: column;
     }
 
     @media (min-width: $breakpoints-m) {
-      gap: 40px;
       max-width: 696px;
-      height: 84px;
       padding-inline: 24px;
+      margin-bottom: 60px;
 
       &__search {
         display: none;
