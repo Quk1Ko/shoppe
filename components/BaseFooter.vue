@@ -3,6 +3,7 @@
   import { footerNavItems, socialLinks } from '~/constants/footer.constants'
   import BaseInput from '~/components/BaseInput.vue'
   import BaseNotification from '~/components/BaseNotification.vue'
+  import BaseCheckbox from '~/components/BaseCheckbox.vue'
   import { useShare } from '~/composables/useShare'
 
   const { share } = useShare()
@@ -66,15 +67,10 @@
       <div class="footer__divider"></div>
 
       <div class="footer__mobile-top">
-        <BaseInput
-          v-model="newsletterEmail"
-          :error="error"
-          class="footer__input-mobile"
-          :show-checkbox="true"
-          :checkbox-checked="checkboxChecked"
-          @update:checkbox-checked="checkboxChecked = $event"
-          @submit="handleSubmit"
-        />
+        <div class="footer__input-mobile">
+          <BaseInput v-model="newsletterEmail" :error="error" @submit="handleSubmit" />
+          <BaseCheckbox v-model="checkboxChecked" class="footer__checkbox" />
+        </div>
       </div>
 
       <div class="footer__top">
@@ -170,6 +166,16 @@
       display: none;
       flex-direction: column;
       max-width: 389px;
+    }
+
+    &__input-mobile {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    &__checkbox {
+      margin-top: -14px;
     }
 
     &__divider {
