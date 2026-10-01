@@ -3,6 +3,7 @@
   import { navigateTo, useRoute } from '#imports'
   import type { Product } from '~/types/api'
   import { mockProducts } from '~/public/test/mockProducts'
+  import { useShare } from '~/composables/useShare'
 
   const route = useRoute()
 
@@ -29,6 +30,14 @@
     isNotificationOpen.value = false
     await navigateTo('/product')
   }
+  const { share } = useShare()
+
+  const handleShare = (platform: string) => {
+    share(platform, {
+      title: product.value?.title,
+      text: product.value?.title,
+    })
+  }
 </script>
 
 <template>
@@ -37,7 +46,7 @@
       <div v-if="product" class="product-page__layout">
         <ProductGallery :images="images" :title="product.title" />
 
-        <ProductInfo :product="product" @add-to-cart="handleAddToCart" />
+        <ProductInfo :product="product" @add-to-cart="handleAddToCart" @share="handleShare" />
       </div>
 
       <div v-else class="product-page__not-found">

@@ -9,7 +9,7 @@ export const footerNavItems = [
 ]
 
 export const socialLinks = [
-  { aria: 'Facebook', href: '', icon: IconFacebook },
-  { aria: 'Instagram', href: '', icon: IconInstagram },
-  { aria: 'Twitter', href: '', icon: IconTwitter },
+  { aria: 'Facebook', name: 'facebook', icon: IconFacebook },
+  { aria: 'Instagram', name: 'instagram', icon: IconInstagram },
+  { aria: 'Twitter', name: 'twitter', icon: IconTwitter },
 ]

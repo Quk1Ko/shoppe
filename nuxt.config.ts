@@ -28,7 +28,8 @@ export default defineNuxtConfig({
   css: ['~/assets/scss/app.scss'],
   runtimeConfig: {
     public: {
-      apiBaseUrl: process.env.API_BASE_URL,
+      apiBaseUrl: process.env.API_BASE_URL /* ||
+        'https://shoppe-api-eleet.amvera.io'*/,
     },
   },
 })

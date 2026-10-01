@@ -5,6 +5,7 @@
   import { mockProducts } from '~/public/test/mockProducts'
   import IconFilter from '~/assets/icons/IconFilter.vue'
   import IconCross from '~/assets/icons/IconCross.vue'
+  //import { useGetAllProducts } from '~/composables/api/products/useGetAllProducts'
 
   const route = useRoute()
   const router = useRouter()
@@ -13,7 +14,16 @@
   const isNotificationOpen = ref(false)
   const notificationMessage = ref('')
   const pending = ref(false)
+  const products = computed<Product[]>(() => mockProducts)
   const error = ref<Error | null>(null)
+
+  // const {
+  //   data: productsData,
+  //   pending,
+  //   error,
+  // } = useGetAllProducts()
+  //
+  // const products = computed<Product[]>(() => productsData.value ?? [])
 
   const perPage = 6
 
@@ -21,13 +31,10 @@
     const raw = route.query.page
     const value = Array.isArray(raw) ? raw[0] : raw
     const parsed = Number(value)
-    return Number.isFinite(parsed) && parsed > 0 ? parsed : 1
+    return Number.isInteger(parsed) && parsed > 0 ? parsed : 1
   })
 
-  const products = computed<Product[]>(() => mockProducts)
-
   const totalPages = computed(() => Math.max(1, Math.ceil(products.value.length / perPage)))
-
   const safePage = computed(() => Math.max(1, Math.min(page.value, totalPages.value)))
 
   const visiblePages = computed(() => {
@@ -106,7 +113,10 @@
 
         <div v-if="pending" class="shop__loading">Loading...</div>
 
-        <div v-else-if="error" class="shop__error">Failed to load products</div>
+        <div v-else-if="error" class="shop__error">
+          Failed to load products
+          <pre>{{ error }}</pre>
+        </div>
         <div v-else class="shop__right">
           <ProductList
             :products="paginatedProducts"

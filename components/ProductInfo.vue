@@ -1,10 +1,11 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import type { Product } from '~/types/api'
-  import IconFacebook from '~/assets/icons/IconFacebook.vue'
-  import IconInstagram from '~/assets/icons/IconInstagram.vue'
-  import IconTwitter from '~/assets/icons/IconTwitter.vue'
-  import IconLetter from '~/assets/icons/IconLetter.vue'
+  import ProductQuantity from './ProductQuantity.vue'
+  import ProductRating from './ProductRating.vue'
+  import ProductSocials from './ProductSocials.vue'
+  import ProductMeta from './ProductMeta.vue'
+  import IconShare from '~/assets/icons/IconShare.vue'
 
   const props = defineProps<{
     product: Product
@@ -12,23 +13,26 @@
 
   const emit = defineEmits<{
     'add-to-cart': [product: Product, quantity: number]
+    share: [platform: string]
   }>()
 
   const quantity = ref(1)
-
-  const decreaseQuantity = () => {
-    if (quantity.value > 1) {
-      quantity.value--
-    }
-  }
-
-  const increaseQuantity = () => {
-    quantity.value++
-  }
+  const isDescriptionExpanded = ref(false)
 
   const handleAddToCart = () => {
     emit('add-to-cart', props.product, quantity.value)
   }
+
+  const toggleDescription = () => {
+    isDescriptionExpanded.value = !isDescriptionExpanded.value
+  }
+
+  const descriptionText =
+    props.product.description ||
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
+      'Aliquam placerat, augue a volutpat hendrerit, sapien tortor ' +
+      'adipiscing augue, a maximus elit ex vitae libero. Sed quis mauris ' +
+      'eget arcu facilisis consequat sed eu felis.'
 </script>
 
 <template>
@@ -37,77 +41,54 @@
       {{ product.title }}
     </h2>
 
-    <h4 class="product-info__price">$ {{ product.price.toFixed(2) }}</h4>
+    <div class="product-info__price-row">
+      <h4 class="product-info__price">$ {{ product.price.toFixed(2).replace('.', ',') }}</h4>
 
-    <div class="product-info__rating">
-      <div class="product-info__stars" aria-label="5 out of 5 stars">
-        <span>★</span>
-        <span>★</span>
-        <span>★</span>
-        <span>★</span>
-        <span>★</span>
-      </div>
-      <h5 class="product-info__reviews">1 customer review</h5>
+      <BaseButton
+        type="transparent"
+        class="product-info__share"
+        aria-label="Share"
+        @click="emit('share', 'native')"
+      >
+        <IconShare />
+      </BaseButton>
     </div>
 
-    <h5 class="product-info__description">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat, augue a volutpat
-      hendrerit, sapien tortor adipiscing augue, a maximus elit ex vitae libero. Sed quis mauris
-      eget arcu facilisis consequat sed eu felis.
-    </h5>
+    <ProductRating class="product-info__rating" :rating="5" :review-count="1" />
+
+    <div class="product-info__description-wrap">
+      <h5
+        class="product-info__description"
+        :class="{ 'product-info__description--expanded': isDescriptionExpanded }"
+      >
+        {{ descriptionText }}
+      </h5>
+
+      <BaseButton type="transparent" class="product-info__view-more" @click="toggleDescription">
+        {{ isDescriptionExpanded ? 'View less' : 'View more' }} &gt;
+      </BaseButton>
+    </div>
 
     <div class="product-info__purchase">
-      <div class="product-info__quantity">
-        <BaseButton
-          type="transparent"
-          aria-label="Decrease quantity"
-          :disabled="quantity === 1"
-          @click="decreaseQuantity"
-        >
-          −
-        </BaseButton>
-        <span>{{ quantity }}</span>
-        <BaseButton type="transparent" aria-label="Increase quantity" @click="increaseQuantity">
-          +
-        </BaseButton>
-      </div>
+      <ProductQuantity v-model="quantity" :min="1" :max="99" />
 
       <BaseButton type="transparent" class="product-info__add-button" @click="handleAddToCart">
         ADD TO CART
       </BaseButton>
     </div>
 
-    <div class="product-info__socials">
-      <BaseButton type="transparent" aria-label="Email">
-        <IconLetter />
-      </BaseButton>
-      <BaseButton type="transparent" aria-label="Facebook">
-        <IconFacebook />
-      </BaseButton>
-      <BaseButton type="transparent" aria-label="Instagram">
-        <IconInstagram />
-      </BaseButton>
-      <BaseButton type="transparent" aria-label="Twitter">
-        <IconTwitter />
-      </BaseButton>
-    </div>
+    <ProductSocials class="product-info__socials" @share="emit('share', $event)" />
 
-    <div class="product-info__meta">
-      <div class="product-info__meta-row">
-        <h5 class="product-info__meta-row-text">SKU:</h5>
-        <h5>{{ product.id }}</h5>
-      </div>
-      <div class="product-info__meta-row">
-        <h5 class="product-info__meta-row-text">Categories:</h5>
-        <h5>Fashion, Style</h5>
-      </div>
-    </div>
+    <ProductMeta class="product-info__meta" :sku="product.id" categories="Fashion, Style" />
   </div>
 </template>
 
 <style lang="scss" scoped>
   .product-info {
-    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
 
     &__title {
       margin: 0 0 16px;
@@ -122,8 +103,19 @@
       }
     }
 
+    &__price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+
+      @media (max-width: $breakpoints-m) {
+        margin-bottom: 16px;
+      }
+    }
+
     &__price {
-      margin: 0 0 24px;
+      margin: 0;
       font-family: var(--font-primary), sans-serif;
       font-size: var(--h4-size);
       font-weight: var(--h4-weight);
@@ -131,50 +123,72 @@
       color: var(--color-accent);
 
       @media (max-width: $breakpoints-m) {
-        margin-bottom: 24px;
         font-size: var(--h5-size);
         font-weight: var(--h5-weight);
         line-height: var(--h5-lh);
       }
     }
 
-    &__rating {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      margin-bottom: 16px;
+    &__share {
+      display: none;
+      padding: 0;
+      color: var(--color-black);
 
       @media (max-width: $breakpoints-m) {
-        display: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+      }
+
+      &:hover {
+        background: transparent;
       }
     }
 
-    &__stars {
-      display: flex;
-      gap: 4px;
-      font-size: 16px;
-      line-height: 1;
-      color: var(--color-black);
-    }
+    &__description-wrap {
+      margin-bottom: 32px;
 
-    &__reviews {
-      margin: 0;
-      font-size: var(--body-small-size);
-      font-weight: var(--body-small-weight);
-      line-height: var(--body-small-lh);
-      color: var(--color-neutral-dark-gray);
+      @media (max-width: $breakpoints-m) {
+        order: 2;
+        margin-bottom: 28px;
+      }
     }
 
     &__description {
       max-width: 480px;
-      margin: 0 0 32px;
+      margin: 0;
       color: var(--color-neutral-dark-gray);
 
       @media (max-width: $breakpoints-m) {
-        margin-bottom: 24px;
+        max-height: 40px;
+        margin-bottom: 8px;
+        overflow: hidden;
         font-size: var(--body-small-size);
         font-weight: var(--body-small-weight);
         line-height: var(--body-small-lh);
+
+        &--expanded {
+          max-height: none;
+          overflow: visible;
+        }
+      }
+    }
+
+    &__view-more {
+      display: none;
+      padding: 0;
+      font-size: var(--body-small-size);
+      font-weight: 500;
+      color: var(--color-accent);
+
+      @media (max-width: $breakpoints-m) {
+        display: inline-flex;
+      }
+
+      &:hover {
+        background: transparent;
       }
     }
 
@@ -190,61 +204,8 @@
         flex-direction: column;
         gap: 12px;
         align-items: stretch;
-        margin-bottom: 28px;
-      }
-    }
-
-    &__quantity {
-      box-sizing: border-box;
-      display: flex;
-      flex: 0 0 102px;
-      align-items: center;
-      justify-content: space-between;
-      width: 102px;
-      height: 48px;
-      padding: 0 12px;
-      font-size: var(--body-medium-size);
-      line-height: 1;
-      color: var(--color-neutral-dark-gray);
-      background: var(--color-neutral-light-gray);
-      border-radius: 4px;
-
-      @media (max-width: $breakpoints-m) {
-        flex: none;
-        width: 100%;
-        min-width: 0;
-        max-width: 100%;
-        height: 44px;
-      }
-
-      :deep(.base-button) {
-        display: flex;
-        flex-shrink: 0;
-        align-items: center;
-        justify-content: center;
-        width: 24px;
-        min-width: 24px;
-        height: 100%;
-        padding: 0;
-        font-size: 18px;
-        line-height: 1;
-        color: var(--color-neutral-dark-gray);
-
-        &:disabled {
-          cursor: default;
-          opacity: 0.5;
-        }
-
-        &:hover {
-          background: transparent;
-          border-radius: 0;
-        }
-      }
-
-      span {
-        min-width: 20px;
-        font-weight: 500;
-        text-align: center;
+        order: 1;
+        margin-bottom: 24px;
       }
     }
 
@@ -284,51 +245,14 @@
     }
 
     &__socials {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-      margin-bottom: 28px;
-
-      :deep(.base-button) {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 20px;
-        height: 20px;
-        padding: 0;
-        font-size: 16px;
-        line-height: 1;
-        color: var(--color-neutral-dark-gray);
-        transition: color 0.2s;
-
-        &:hover {
-          color: var(--color-black);
-          background: transparent;
-          border-radius: 0;
-        }
+      @media (max-width: $breakpoints-m) {
+        order: 3;
       }
     }
 
     &__meta {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-
-      h5 {
-        margin: 0;
-      }
-    }
-
-    &__meta-row {
-      display: flex;
-      gap: 8px;
-      font-size: var(--body-small-size);
-      font-weight: var(--body-small-weight);
-      line-height: var(--body-small-lh);
-      color: var(--color-neutral-dark-gray);
-
-      &-text {
-        color: var(--color-black);
+      @media (max-width: $breakpoints-m) {
+        order: 4;
       }
     }
   }

@@ -3,6 +3,8 @@
   import { Swiper, SwiperSlide } from 'swiper/vue'
   import type { Swiper as SwiperType } from 'swiper'
   import 'swiper/css'
+  import ProductGalleryThumbnails from './ProductGalleryThumbnails.vue'
+  import ProductGalleryProgress from './ProductGalleryProgress.vue'
 
   const props = defineProps<{
     images: string[]
@@ -33,21 +35,12 @@
 <template>
   <div class="product-gallery">
     <div class="product-gallery__desktop">
-      <div class="product-gallery__thumbnails">
-        <BaseButton
-          v-for="(image, index) in images"
-          :key="index"
-          type="transparent"
-          class="product-gallery__thumbnail"
-          :class="{
-            'product-gallery__thumbnail--active': selectedImage === index,
-          }"
-          :aria-label="`View image ${index + 1}`"
-          @click="selectThumbnail(index)"
-        >
-          <img :src="image" :alt="`${title} ${index + 1}`" />
-        </BaseButton>
-      </div>
+      <ProductGalleryThumbnails
+        :images="images"
+        :title="title"
+        :selected-index="selectedImage"
+        @select="selectThumbnail"
+      />
 
       <div class="product-gallery__main">
         <img :src="currentImage" :alt="title" />
@@ -56,14 +49,11 @@
 
     <div v-if="images.length > 1" class="product-gallery__progress-row">
       <div class="product-gallery__progress-spacer" aria-hidden="true" />
-      <div class="product-gallery__progress">
-        <span
-          :style="{
-            width: `${100 / images.length}%`,
-            transform: `translateX(${selectedImage * 100}%)`,
-          }"
-        />
-      </div>
+      <ProductGalleryProgress
+        class="product-gallery__progress"
+        :total="images.length"
+        :current="selectedImage"
+      />
     </div>
 
     <div class="product-gallery__mobile">
@@ -81,17 +71,12 @@
         </SwiperSlide>
       </Swiper>
 
-      <div
+      <ProductGalleryProgress
         v-if="images.length > 1"
-        class="product-gallery__progress product-gallery__progress--mobile"
-      >
-        <span
-          :style="{
-            width: `${100 / images.length}%`,
-            transform: `translateX(${selectedImage * 100}%)`,
-          }"
-        />
-      </div>
+        class="product-gallery__progress--mobile"
+        :total="images.length"
+        :current="selectedImage"
+      />
     </div>
   </div>
 </template>
@@ -120,54 +105,6 @@
       }
     }
 
-    &__thumbnails {
-      display: flex;
-      flex-shrink: 0;
-      flex-direction: column;
-      gap: 16px;
-      width: 120px;
-
-      @media (max-width: $breakpoints-xl) {
-        gap: 14px;
-        width: 100px;
-      }
-
-      @media (max-width: $breakpoints-l) {
-        gap: 12px;
-        width: 80px;
-      }
-    }
-
-    &__thumbnail {
-      flex: 1 1 0;
-      width: 100%;
-      min-height: 0;
-      padding: 0;
-      overflow: hidden;
-      cursor: pointer;
-      background: var(--color-neutral-light-gray);
-      border: 1px solid transparent;
-      border-radius: 8px;
-      transition: border-color 0.2s;
-
-      img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-      }
-
-      &--active {
-        border-color: var(--color-black);
-      }
-
-      &:hover {
-        background: var(--color-neutral-light-gray);
-        border-radius: 8px;
-      }
-    }
-
     &__main {
       position: relative;
       flex: 0 1 auto;
@@ -186,6 +123,7 @@
         height: 100%;
         object-fit: cover;
         object-position: center;
+        transition: transform 0.3s ease;
       }
     }
 
@@ -225,34 +163,12 @@
 
     &__progress {
       flex: 0 1 auto;
-      width: 100%;
       max-width: 540px;
-      height: 2px;
-      overflow: hidden;
-      background: var(--color-neutral-gray);
+    }
 
-      span {
-        display: block;
-        height: 2px;
-        background: var(--color-black);
-        transition: transform 0.25s ease;
-      }
-
-      &--mobile {
-        width: 100%;
-        max-width: 344px;
-        height: 2px;
-        margin: 16px auto 0;
-        overflow: hidden;
-        background: var(--color-neutral-gray);
-
-        span {
-          display: block;
-          height: 2px;
-          background: var(--color-black);
-          transition: transform 0.25s ease;
-        }
-      }
+    &__progress--mobile {
+      max-width: 344px;
+      margin: 16px auto 0;
     }
 
     &__mobile {
@@ -293,6 +209,10 @@
         object-fit: cover;
         object-position: center;
       }
+    }
+
+    &__main img:hover {
+      transform: scale(1.5);
     }
   }
 </style>
