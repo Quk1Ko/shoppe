@@ -2,10 +2,10 @@
   import { computed, ref } from 'vue'
   import { useRoute, useRouter, navigateTo } from '#imports'
   import type { Product } from '~/types/api'
-  import { mockProducts } from '~/public/test/mockProducts'
+  //import { mockProducts } from '~/public/test/mockProducts'
   import IconFilter from '~/assets/icons/IconFilter.vue'
   import IconCross from '~/assets/icons/IconCross.vue'
-  //import { useGetAllProducts } from '~/composables/api/products/useGetAllProducts'
+  import { useGetAllProducts } from '~/composables/api/products/useGetAllProducts'
 
   const route = useRoute()
   const router = useRouter()
@@ -13,17 +13,13 @@
   const isFiltersOpen = ref(false)
   const isNotificationOpen = ref(false)
   const notificationMessage = ref('')
-  const pending = ref(false)
-  const products = computed<Product[]>(() => mockProducts)
-  const error = ref<Error | null>(null)
+  // const pending = ref(false)
+  // const products = computed<Product[]>(() => mockProducts)
+  // const error = ref<Error | null>(null)
 
-  // const {
-  //   data: productsData,
-  //   pending,
-  //   error,
-  // } = useGetAllProducts()
-  //
-  // const products = computed<Product[]>(() => productsData.value ?? [])
+  const { data: productsData, pending, error } = useGetAllProducts()
+
+  const products = computed<Product[]>(() => productsData.value ?? [])
 
   const perPage = 6
 
