@@ -8,15 +8,18 @@
       type?: 'success' | 'error' | 'info'
       message: string
       closable?: boolean
+      actionText?: string
     }>(),
     {
       type: 'success',
       closable: false,
+      actionText: '',
     },
   )
 
   const emit = defineEmits<{
     close: []
+    action: []
   }>()
 
   const { isDesktop } = useBreakpoints()
@@ -40,14 +43,26 @@
       </p>
     </div>
 
-    <BaseButton
-      v-if="closable"
-      type="transparent"
-      class="base-notification__close"
-      @click="emit('close')"
-    >
-      <IconCross />
-    </BaseButton>
+    <div class="base-notification__actions">
+      <BaseButton
+        v-if="actionText"
+        type="transparent"
+        class="base-notification__action"
+        @click="emit('action')"
+      >
+        {{ actionText }}
+      </BaseButton>
+
+      <BaseButton
+        v-if="closable"
+        type="transparent"
+        class="base-notification__close"
+        aria-label="Close notification"
+        @click="emit('close')"
+      >
+        <IconCross />
+      </BaseButton>
+    </div>
   </div>
 </template>
 
@@ -68,7 +83,7 @@
     border-radius: 4px;
     box-shadow: 0 10px 30px rgb(0 0 0 / 12%);
     transform: translateX(-50%);
-    animation: slideUp 0.3s ease;
+    animation: slide-up 0.3s ease;
 
     &__content {
       display: flex;
@@ -91,12 +106,25 @@
       line-height: 1.4;
     }
 
-    &__close {
+    &__actions {
+      display: flex;
       flex: 0 0 auto;
+      gap: 8px;
+      align-items: center;
+    }
+
+    &__action {
+      padding: 4px 8px;
+      font-size: var(--body-medium-size);
+      color: var(--color-accent);
+      white-space: nowrap;
+    }
+
+    &__close {
       width: 14px;
       height: 14px;
       padding: 0;
-      color: #a18a68;
+      color: var(--color-accent);
     }
 
     &--desktop {

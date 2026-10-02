@@ -4,6 +4,16 @@
   import BaseInput from '~/components/BaseInput.vue'
   import BaseNotification from '~/components/BaseNotification.vue'
   import BaseCheckbox from '~/components/BaseCheckbox.vue'
+  import { useShare } from '~/composables/useShare'
+
+  const { share } = useShare()
+
+  const handleSocialShare = (platform: string) => {
+    share(platform, {
+      title: 'Shelly',
+      text: 'Check out Shelly',
+    })
+  }
 
   const newsletterEmail = ref('')
   const error = ref<string | null>(null)
@@ -97,6 +107,7 @@
             :key="item.aria"
             class="footer__social-link"
             :aria-label="item.aria"
+            @click.prevent="handleSocialShare(item.name)"
           >
             <component :is="item.icon" />
           </a>
@@ -112,6 +123,7 @@
             :key="item.aria"
             class="footer__social-link"
             :aria-label="item.aria"
+            @click.prevent="handleSocialShare(item.name)"
           >
             <component :is="item.icon" />
           </a>
@@ -265,6 +277,7 @@
       justify-content: center;
       color: var(--color-neutral-dark-gray);
       text-decoration: none;
+      cursor: pointer;
 
       &:hover {
         color: var(--color-primary);
