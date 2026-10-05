@@ -1,0 +1,126 @@
+import type { Product } from '~/types/api'
+
+export const mockProducts: Product[] = [
+  {
+    id: 1,
+    title: 'Lira Earrings',
+    price: 20,
+    image: '/test/images/testImage.jpg',
+    badge: '-%21',
+  },
+  {
+    id: 2,
+    title: 'Hal Earrings',
+    price: 25,
+    image: '/test/images/testImage.jpg',
+  },
+  {
+    id: 3,
+    title: 'Kaede Hair Pin Set Of 3',
+    price: 30,
+    image: '/test/images/testImage.jpg',
+  },
+  {
+    id: 4,
+    title: 'Hair Pin Set of 3',
+    price: 30,
+    image: '/test/images/testImage.jpg',
+  },
+  {
+    id: 5,
+    title: 'Plaine Necklace',
+    price: 19,
+    image: '/test/images/testImage.jpg',
+    badge: 'Sold out',
+  },
+  {
+    id: 6,
+    title: 'Yuki Hair Pin Set of 3',
+    price: 29,
+    image: '/test/images/testImage.jpg',
+  },
+  {
+    id: 7,
+    title: 'Карточка 7',
+    price: 29,
+    image: '/test/images/testImage.jpg',
+  },
+  {
+    id: 8,
+    title: 'Карточка 8',
+    price: 29,
+    image: '/test/images/testImage.jpg',
+  },
+  {
+    id: 9,
+    title: 'Карточка 9',
+    price: 29,
+    image: '/test/images/testImage.jpg',
+  },
+  {
+    id: 10,
+    title: 'Карточка 10',
+    price: 29,
+    image: '/test/images/testImage.jpg',
+  },
+  {
+    id: 11,
+    title: 'Карточка 11',
+    price: 29,
+    image: '/test/images/testImage.jpg',
+  },
+  {
+    id: 12,
+    title: 'Карточка 12',
+    price: 29,
+    image: '/test/images/testImage.jpg',
+  },
+  {
+    id: 13,
+    title: 'Карточка 13',
+    price: 29,
+    image: '/test/images/testImage.jpg',
+  },
+  {
+    id: 14,
+    title: 'Карточка 14',
+    price: 29,
+    image: '/test/images/testImage.jpg',
+  },
+  {
+    id: 15,
+    title: 'Карточка 15',
+    price: 29,
+    image: '/test/images/testImage.jpg',
+  },
+  {
+    id: 16,
+    title: 'Карточка 16',
+    price: 29,
+    image: '/test/images/testImage.jpg',
+  },
+  {
+    id: 17,
+    title: 'Карточка 17',
+    price: 29,
+    image: '/test/images/testImage.jpg',
+  },
+  {
+    id: 18,
+    title: 'Карточка 18',
+    price: 29,
+    image: '/test/images/testImage.jpg',
+  },
+  {
+    id: 19,
+    title: 'Карточка 19',
+    price: 29,
+    image: '/test/images/testImage.jpg',
+  },
+  {
+    id: 20,
+    title: 'Карточка 20',
+    price: 29,
+    image: '/test/images/testImage.jpg',
+  },
+]
