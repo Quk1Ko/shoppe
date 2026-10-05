@@ -2,22 +2,23 @@
   import { computed, ref } from 'vue'
   import { navigateTo, useRoute } from '#imports'
   import type { Product } from '~/types/api'
-  import { mockProducts } from '~/public/test/mockProducts'
   import { useShare } from '~/composables/useShare'
+  import { useGetAllProducts } from '~/composables/api/products/useGetAllProducts'
 
   const route = useRoute()
-
   const productId = computed(() => Number(route.params.id))
 
+  const { data: productsData, pending, error } = useGetAllProducts()
+
   const product = computed<Product | undefined>(() => {
-    return mockProducts.find((item) => item.id === productId.value)
+    return productsData.value?.find((item) => item.id === productId.value)
   })
 
   const images = computed(() => {
     if (!product.value?.image) return []
+
     return [product.value.image, product.value.image, product.value.image, product.value.image]
   })
-
   const isNotificationOpen = ref(false)
   const notificationMessage = ref('')
 
@@ -43,14 +44,18 @@
 <template>
   <section class="product-page">
     <div class="container">
-      <div v-if="product" class="product-page__layout">
+      <div v-if="pending" class="product-page__not-found">
+        <h1>Loading...</h1>
+      </div>
+
+      <div v-else-if="error" class="product-page__not-found">
+        <h1>Failed to load product</h1>
+      </div>
+
+      <div v-else-if="product" class="product-page__layout">
         <ProductGallery :images="images" :title="product.title" />
 
         <ProductInfo :product="product" @add-to-cart="handleAddToCart" @share="handleShare" />
-      </div>
-
-      <div v-else class="product-page__not-found">
-        <h1>Product not found</h1>
       </div>
     </div>
 
